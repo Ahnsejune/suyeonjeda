@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="주식회사 지음터 - 청소년의 가능성을 발견하고 미래를 설계하는 진로교육 전문기업" />
+  <meta name="theme-color" content="#063f49" />
+  <title>주식회사 지음터 | 가능성을 짓는 진로교육</title>
+
+  <style>
+    :root {
+      --teal: #005f73;
+      --teal-deep: #063f49;
+      --teal-ink: #0a3138;
+      --orange: #ee9b00;
+      --orange-soft: #ffd98b;
+      --cream: #f5f2e9;
+      --paper: #fbfaf6;
+      --white: #ffffff;
+      --ink: #14272c;
+      --text: #41545a;
+      --muted: #77878b;
+      --line: rgba(20, 39, 44, 0.14);
+      --line-light: rgba(255, 255, 255, 0.16);
+      --shadow: 0 24px 80px rgba(18, 44, 51, 0.13);
+      --container: 1240px;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      min-width: 320px;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+      letter-spacing: -0.02em;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+
+    body.menu-open,
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      color: inherit;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    ::selection {
+      color: var(--white);
+      background: var(--teal);
+    }
+
+    .container {
+      width: min(calc(100% - 48px), var(--container));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -80px;
+      left: 20px;
+      z-index: 3000;
+      padding: 12px 16px;
+      color: var(--white);
+      background: var(--teal-deep);
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 2500;
+      width: 0;
+      height: 3px;
+      background: var(--orange);
+      pointer-events: none;
+    }
+
+    .announcement {
+      position: relative;
+      z-index: 1200;
+      color: rgba(255,255,255,.84);
+      background: var(--teal-deep);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      font-size: 12px;
+    }
+
+    .announcement-inner {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .announcement strong {
+      color: var(--orange-soft);
+      font-weight: 700;
+    }
+
+    .announcement a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1100;
+      border-bottom: 1px solid transparent;
+      transition: background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(251, 250, 246, .9);
+      border-bottom-color: var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      min-height: 84px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      width: max-content;
+    }
+
+    .brand-symbol {
+      width: 44px;
+      aspect-ratio: 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--teal);
+      clip-path: polygon(50% 0, 100% 24%, 90% 84%, 50% 100%, 10% 84%, 0 24%);
+    }
+
+    .brand-symbol::after {
+      content: "";
+      width: 12px;
+      height: 17px;
+      border: 2px solid currentColor;
+      border-top: 0;
+      transform: translateY(1px);
+    }
+
+    .brand-copy strong {
+      display: block;
+      color: var(--teal-deep);
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .18em;
+    }
+
+    .gnb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .gnb a {
+      position: relative;
+      padding-block: 30px;
+      color: #30464c;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .gnb a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0;
+      transform: translate(-50%, 8px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .gnb a:hover::after,
+    .gnb a:focus-visible::after,
+    .gnb a.active::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-apply {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 18px 0 20px;
+      color: var(--white);
+      background: var(--teal-deep);
+      font-size: 13px;
+      font-weight: 800;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .header-apply:hover {
+      background: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .header-apply .arrow,
+    .text-link .arrow,
+    .btn .arrow {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--teal-deep);
+      background: var(--orange-soft);
+      transition: transform .2s ease;
+    }
+
+    .header-apply:hover .arrow,
+    .text-link:hover .arrow,
+    .btn:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .menu-toggle {
+      width: 46px;
+      height: 46px;
+      display: none;
+      place-items: center;
+      border: 1px solid var(--line);
+    }
+
+    .menu-toggle span,
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      width: 20px;
+      height: 1.5px;
+      display: block;
+      background: var(--teal-deep);
+      transition: .25s ease;
+    }
+
+    .menu-toggle span {
+      position: relative;
+    }
+
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-toggle span::before { top: -6px; }
+    .menu-toggle span::after { top: 6px; }
+    .menu-toggle.active span { background: transparent; }
+    .menu-toggle.active span::before { top: 0; transform: rotate(45deg); }
+    .menu-toggle.active span::after { top: 0; transform: rotate(-45deg); }
+
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 122px);
+      display: flex;
+      align-items: stretch;
+      isolation: isolate;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(90deg, rgba(0,95,115,.06) 1px, transparent 1px),
+        linear-gradient(rgba(0,95,115,.06) 1px, transparent 1px),
+        var(--paper);
+      background-size: 48px 48px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -20%;
+      right: -12%;
+      z-index: -2;
+      width: 58vw;
+      height: 58vw;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, rgba(238,155,0,.24), rgba(0,95,115,.06) 52%, transparent 70%);
+      filter: blur(10px);
+    }
+
+    .hero-inner {
+      min-height: 760px;
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      align-items: center;
+      gap: 72px;
+      padding: 82px 0 96px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-index {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .14em;
+    }
+
+    .hero-index::before {
+      content: "";
+      width: 52px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    .hero h1 {
+      max-width: 780px;
+      font-size: clamp(54px, 6.2vw, 92px);
+      font-weight: 900;
+      line-height: .98;
+      letter-spacing: -0.075em;
+    }
+
+    .hero h1 .outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--teal);
+      text-stroke: 1.5px var(--teal);
+    }
+
+    .hero h1 .accent {
+      position: relative;
+      color: var(--teal);
+    }
+
+    .hero h1 .accent::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      right: -4px;
+      bottom: 5px;
+      z-index: -1;
+      height: 16px;
+      background: var(--orange-soft);
+      transform: rotate(-1.5deg);
+    }
+
+    .hero-desc {
+      max-width: 610px;
+      margin-top: 30px;
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 38px;
+    }
+
+    .btn {
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: var(--white); background: var(--teal-deep); }
+    .btn-primary:hover { background: var(--teal); }
+    .btn-ghost { color: var(--teal-deep); border-color: var(--line); background: rgba(255,255,255,.54); }
+    .btn-ghost:hover { border-color: rgba(0,95,115,.38); background: var(--white); }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      max-width: 650px;
+      margin-top: 48px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-meta article {
+      min-height: 92px;
+      padding: 19px 22px 17px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .hero-meta article:not(:first-child) { padding-left: 22px; }
+    .hero-meta article:last-child { border-right: 0; }
+
+    .hero-meta strong {
+      display: block;
+      color: var(--teal-deep);
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .hero-meta span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hero-lab {
+      position: relative;
+      min-height: 620px;
+      perspective: 1200px;
+    }
+
+    .lab-shell {
+      position: absolute;
+      inset: 22px 0 0 26px;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--teal-deep);
+      box-shadow: var(--shadow);
+      transform: rotateY(-3deg) rotateX(1deg);
+      transform-style: preserve-3d;
+      transition: transform .7s var(--ease);
+    }
+
+    .lab-shell:hover {
+      transform: rotateY(0) rotateX(0);
+    }
+
+    .lab-topbar {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: 22px;
+      border-bottom: 1px solid var(--line-light);
+      font-size: 11px;
+      letter-spacing: .13em;
+    }
+
+    .lab-dots { display: flex; gap: 7px; }
+    .lab-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.28); }
+    .lab-dots i:first-child { background: var(--orange); }
+
+    .lab-canvas {
+      position: relative;
+      height: calc(100% - 56px);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(0,95,115,.65), transparent 38%),
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: auto, 42px 42px, 42px 42px;
+    }
+
+    .lab-canvas::before {
+      content: "CAREER\A MAP";
+      white-space: pre;
+      position: absolute;
+      left: 32px;
+      bottom: 28px;
+      color: rgba(255,255,255,.08);
+      font-size: 82px;
+      font-weight: 900;
+      line-height: .8;
+      letter-spacing: -.08em;
+    }
+
+    .map-svg {
+      position: absolute;
+      inset: 8% 8% 12%;
+      width: 84%;
+      height: 80%;
+      overflow: visible;
+    }
+
+    .map-svg path {
+      fill: none;
+      stroke: rgba(255,255,255,.28);
+      stroke-width: 1.2;
+      stroke-dasharray: 7 9;
+      animation: dash 18s linear infinite;
+    }
+
+    .map-svg circle {
+      fill: var(--paper);
+      stroke: var(--orange);
+      stroke-width: 4;
+      filter: drop-shadow(0 8px 18px rgba(238,155,0,.25));
+    }
+
+    @keyframes dash { to { stroke-dashoffset: -140; } }
+
+    .map-center {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      width: 148px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(12px);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 24px rgba(255,255,255,.025);
+    }
+
+    .map-center::before {
+      content: "";
+      width: 78px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 18px 48px rgba(238,155,0,.28);
+    }
+
+    .map-center strong {
+      position: absolute;
+      color: var(--teal-deep);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .map-tag {
+      position: absolute;
+      min-width: 116px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.7);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    .map-tag strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--white);
+      font-size: 14px;
+      letter-spacing: -.02em;
+    }
+
+    .tag-1 { top: 16%; left: 8%; }
+    .tag-2 { top: 16%; right: 7%; }
+    .tag-3 { bottom: 13%; left: 9%; }
+    .tag-4 { right: 8%; bottom: 14%; }
+
+    .lab-floating {
+      position: absolute;
+      right: -16px;
+      bottom: 34px;
+      z-index: 4;
+      width: 230px;
+      padding: 20px;
+      color: var(--ink);
+      background: var(--orange-soft);
+      box-shadow: 0 24px 60px rgba(20,39,44,.18);
+      transform: rotate(2deg);
+    }
+
+    .lab-floating small {
+      color: rgba(20,39,44,.6);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .lab-floating strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    .lab-floating p {
+      margin-top: 10px;
+      color: rgba(20,39,44,.68);
+      font-size: 12px;
+    }
+
+    .marquee {
+      overflow: hidden;
+      color: var(--white);
+      background: var(--teal);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .marquee-track {
+      width: max-content;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-block: 16px;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-track span {
+      display: inline-flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .marquee-track span::after {
+      content: "✦";
+      color: var(--orange-soft);
+    }
+
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    .section {
+      padding: 138px 0;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .display-title {
+      margin-top: 24px;
+      font-size: clamp(40px, 5vw, 70px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.065em;
+    }
+
+    .display-title em {
+      color: var(--teal);
+      font-style: normal;
+    }
+
+    .section-intro {
+      max-width: 640px;
+      margin-top: 24px;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: 96px;
+      align-items: start;
+    }
+
+    .intro-sticky {
+      position: sticky;
+      top: 128px;
+    }
+
+    .intro-sticky .quote-mark {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 28px;
+      color: var(--teal-deep);
+      background: var(--orange-soft);
+      font-family: Georgia, serif;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .intro-sticky blockquote {
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 850;
+      line-height: 1.35;
+      letter-spacing: -0.055em;
+    }
+
+    .intro-sticky p {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .process-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .process-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 74px 1fr auto;
+      gap: 24px;
+      align-items: start;
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding .35s var(--ease), background .35s ease;
+    }
+
+    .process-item::before {
+      content: "";
+      position: absolute;
+      inset: 0 -24px;
+      z-index: -1;
+      background: var(--white);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .process-item:hover {
+      padding-left: 24px;
+      padding-right: 18px;
+    }
+
+    .process-item:hover::before { opacity: 1; }
+
+    .process-no {
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .1em;
+    }
+
+    .process-copy h3 {
+      font-size: 27px;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+    }
+
+    .process-copy p {
+      max-width: 620px;
+      margin-top: 10px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .process-arrow {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      transition: transform .3s ease, background .3s ease;
+    }
+
+    .process-item:hover .process-arrow {
+      color: var(--white);
+      background: var(--teal);
+      transform: rotate(45deg);
+    }
+
+    .diagnosis-section {
+      color: var(--white);
+      background: var(--teal-deep);
+      overflow: hidden;
+    }
+
+    .diagnosis-section .section-label { color: var(--orange-soft); }
+    .diagnosis-section .display-title em { color: var(--orange-soft); }
+    .diagnosis-section .section-intro { color: rgba(255,255,255,.68); }
+
+    .diagnosis-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 50px;
+      margin-bottom: 64px;
+    }
+
+    .diagnosis-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .diagnosis-tab {
+      min-height: 46px;
+      padding: 0 17px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      font-weight: 750;
+      transition: .25s ease;
+    }
+
+    .diagnosis-tab:hover,
+    .diagnosis-tab.active {
+      color: var(--teal-deep);
+      border-color: var(--orange-soft);
+      background: var(--orange-soft);
+    }
+
+    .diagnosis-stage {
+      position: relative;
+      min-height: 540px;
+      border-top: 1px solid rgba(255,255,255,.16);
+      border-bottom: 1px solid rgba(255,255,255,.16);
+    }
+
+    .diagnosis-panel {
+      display: none;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 76px;
+      align-items: center;
+      min-height: 540px;
+      padding: 56px 0;
+      animation: panelIn .55s var(--ease);
+    }
+
+    .diagnosis-panel.active { display: grid; }
+
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .diagnosis-copy .panel-index {
+      color: var(--orange-soft);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+
+    .diagnosis-copy h3 {
+      margin-top: 18px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.2;
+      letter-spacing: -0.055em;
+    }
+
+    .diagnosis-copy p {
+      margin-top: 20px;
+      color: rgba(255,255,255,.68);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .diagnosis-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .diagnosis-keywords span {
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+    }
+
+    .report-preview {
+      position: relative;
+      min-height: 390px;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 0 32px 90px rgba(0,0,0,.25);
+      overflow: hidden;
+    }
+
+    .report-preview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,95,115,.06) 1px, transparent 1px),
+        linear-gradient(rgba(0,95,115,.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    .report-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 38px;
+      min-height: 390px;
+      padding: 34px;
+    }
+
+    .report-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .report-head strong { color: var(--teal-deep); font-size: 16px; }
+    .report-head span { color: var(--muted); font-size: 10px; letter-spacing: .12em; }
+
+    .radar {
+      position: relative;
+      width: 250px;
+      aspect-ratio: 1;
+      margin: 32px auto 0;
+    }
+
+    .radar svg { width: 100%; height: 100%; }
+    .radar-grid { fill: rgba(0,95,115,.03); stroke: rgba(0,95,115,.18); }
+    .radar-data { fill: rgba(238,155,0,.28); stroke: var(--orange); stroke-width: 2.5; }
+
+    .report-side {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 86px 1fr 34px;
+      gap: 12px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .score-bar {
+      height: 7px;
+      background: rgba(0,95,115,.1);
+      overflow: hidden;
+    }
+
+    .score-bar i {
+      display: block;
+      width: var(--score);
+      height: 100%;
+      background: var(--teal);
+      transform-origin: left;
+      animation: scoreGrow .9s var(--ease) both;
+    }
+
+    @keyframes scoreGrow { from { transform: scaleX(0); } }
+
+    .score-row b {
+      color: var(--teal-deep);
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .report-note {
+      margin-top: 20px;
+      padding: 16px;
+      border-left: 3px solid var(--orange);
+      color: var(--text);
+      background: rgba(255,255,255,.7);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .programs-section {
+      background: var(--cream);
+    }
+
+    .programs-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 54px;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--teal-deep);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .text-link .arrow {
+      color: var(--white);
+      background: var(--teal);
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: 1.22fr .78fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 18px;
+      min-height: 650px;
+    }
+
+    .program-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 300px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+    }
+
+    .program-card:hover {
+      z-index: 2;
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+
+    .program-card.featured {
+      grid-row: 1 / 3;
+      min-height: 650px;
+      color: var(--white);
+      background: var(--teal);
+      border-color: transparent;
+    }
+
+    .program-card::before {
+      content: attr(data-number);
+      position: absolute;
+      top: 20px;
+      right: 26px;
+      color: rgba(0,95,115,.08);
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.08em;
+    }
+
+    .program-card.featured::before { color: rgba(255,255,255,.08); }
+
+    .program-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .13em;
+    }
+
+    .program-card.featured .program-type { color: var(--orange-soft); }
+
+    .program-card h3 {
+      max-width: 500px;
+      margin-top: 20px;
+      font-size: clamp(28px, 3.2vw, 46px);
+      line-height: 1.2;
+      letter-spacing: -0.055em;
+    }
+
+    .program-card:not(.featured) h3 { font-size: 29px; }
+
+    .program-card p {
+      max-width: 530px;
+      margin-top: 16px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .program-card.featured p { color: rgba(255,255,255,.7); }
+
+    .program-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .program-tags span {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .program-card.featured .program-tags span {
+      color: rgba(255,255,255,.78);
+      border-color: rgba(255,255,255,.17);
+    }
+
+    .program-visual {
+      position: absolute;
+      right: -36px;
+      bottom: -36px;
+      width: 330px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+    }
+
+    .program-visual::before,
+    .program-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .program-visual::before {
+      inset: 16%;
+      border: 1px dashed rgba(255,255,255,.28);
+      animation: spin 20s linear infinite;
+    }
+
+    .program-visual::after {
+      width: 34%;
+      aspect-ratio: 1;
+      left: 33%;
+      top: 33%;
+      background: var(--orange-soft);
+      box-shadow: 0 0 0 24px rgba(255,255,255,.05);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .program-card .mini-graphic {
+      position: absolute;
+      right: 28px;
+      bottom: 26px;
+      width: 120px;
+      height: 70px;
+      display: flex;
+      align-items: end;
+      gap: 7px;
+      opacity: .8;
+    }
+
+    .mini-graphic i {
+      flex: 1;
+      height: var(--h);
+      background: var(--teal);
+    }
+
+    .trust-section {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background: #10272d;
+    }
+
+    .trust-section::before {
+      content: "JIEUMTEO";
+      position: absolute;
+      right: -2vw;
+      bottom: -6vw;
+      color: rgba(255,255,255,.03);
+      font-size: 17vw;
+      font-weight: 900;
+      line-height: .8;
+      letter-spacing: -.09em;
+      pointer-events: none;
+    }
+
+    .trust-top {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 96px;
+      align-items: end;
+      position: relative;
+      z-index: 2;
+    }
+
+    .trust-top .section-label { color: var(--orange-soft); }
+    .trust-top .display-title em { color: var(--orange-soft); }
+
+    .trust-copy {
+      color: rgba(255,255,255,.68);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .trust-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 70px;
+      border-top: 1px solid var(--line-light);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .trust-item {
+      min-height: 270px;
+      padding: 34px 30px;
+      border-right: 1px solid var(--line-light);
+      transition: background .3s ease;
+    }
+
+    .trust-item:last-child { border-right: 0; }
+    .trust-item:hover { background: rgba(255,255,255,.04); }
+
+    .trust-item .num {
+      color: var(--orange-soft);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .15em;
+    }
+
+    .trust-item h3 {
+      margin-top: 48px;
+      font-size: 28px;
+      letter-spacing: -0.045em;
+    }
+
+    .trust-item p {
+      margin-top: 14px;
+      color: rgba(255,255,255,.6);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .archive-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 54px;
+    }
+
+    .archive-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .archive-item {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      gap: 34px;
+      align-items: center;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding .35s var(--ease), color .2s ease;
+    }
+
+    .archive-item:hover {
+      padding-left: 18px;
+      color: var(--teal);
+    }
+
+    .archive-kind {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: .12em;
+    }
+
+    .archive-item h3 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .archive-item p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      transition: transform .3s ease, background .3s ease;
+    }
+
+    .archive-item:hover .archive-icon {
+      color: var(--white);
+      background: var(--teal);
+      transform: rotate(45deg);
+    }
+
+    .cta-wrap {
+      padding: 0 0 110px;
+    }
+
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      padding: 64px;
+      color: var(--teal-deep);
+      background: var(--orange-soft);
+    }
+
+    .cta-panel::before {
+      content: "";
+      position: absolute;
+      right: -100px;
+      top: -160px;
+      width: 420px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(6,63,73,.18);
+      border-radius: 50%;
+      box-shadow: 0 0 0 58px rgba(6,63,73,.035), 0 0 0 116px rgba(6,63,73,.025);
+    }
+
+    .cta-panel small {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .16em;
+    }
+
+    .cta-panel h2 {
+      max-width: 760px;
+      margin-top: 18px;
+      font-size: clamp(36px, 4.5vw, 62px);
+      line-height: 1.15;
+      letter-spacing: -0.065em;
+    }
+
+    .cta-panel p {
+      margin-top: 18px;
+      color: rgba(6,63,73,.7);
+      font-size: 15px;
+    }
+
+    .cta-panel .btn {
+      position: relative;
+      z-index: 2;
+      min-width: 180px;
+    }
+
+    .site-footer {
+      color: rgba(255,255,255,.62);
+      background: var(--teal-deep);
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr .75fr;
+      gap: 60px;
+      padding: 72px 0 56px;
+    }
+
+    .footer-brand .brand-copy strong { color: var(--white); }
+    .footer-brand .brand-copy span { color: rgba(255,255,255,.4); }
+
+    .footer-brand p {
+      max-width: 450px;
+      margin-top: 22px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer-title {
+      margin-bottom: 18px;
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+
+    .footer-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      font-size: 13px;
+    }
+
+    .footer-list a:hover { color: var(--orange-soft); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0 26px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      font-size: 11px;
+    }
+
+    .footer-bottom div { display: flex; gap: 18px; }
+
+    .floating-apply {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1050;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--teal-deep);
+      background: var(--orange-soft);
+      box-shadow: 0 16px 42px rgba(6,63,73,.22);
+      transition: transform .25s ease;
+    }
+
+    .floating-apply:hover { transform: translateY(-6px) rotate(4deg); }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2200;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(4, 22, 27, .72);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.open { display: grid; }
+
+    .modal-dialog {
+      width: min(100%, 720px);
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 0 40px 120px rgba(0,0,0,.34);
+      animation: modalIn .4s var(--ease);
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(22px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 30px;
+      color: var(--white);
+      background: var(--teal-deep);
+    }
+
+    .modal-head small {
+      display: block;
+      color: var(--orange-soft);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .14em;
+    }
+
+    .modal-head h2 {
+      margin-top: 5px;
+      font-size: 24px;
+      letter-spacing: -0.04em;
+    }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.18);
+      color: var(--white);
+      font-size: 22px;
+    }
+
+    .modal-body { padding: 30px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--teal-deep);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      color: var(--ink);
+      background: var(--white);
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .field input,
+    .field select {
+      height: 50px;
+      padding: 0 14px;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      padding: 14px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,95,115,.08);
+    }
+
+    .form-agree {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .form-agree input { margin-top: 3px; accent-color: var(--teal); }
+    .modal-body .btn { width: 100%; margin-top: 22px; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .header-inner { gap: 20px; }
+      .gnb { gap: 18px; }
+      .gnb a { font-size: 13px; }
+      .hero-inner { gap: 44px; }
+      .hero-lab { min-height: 560px; }
+      .intro-grid,
+      .trust-top { gap: 60px; }
+    }
+
+    @media (max-width: 920px) {
+      .announcement { display: none; }
+      .header-inner { min-height: 72px; grid-template-columns: auto 1fr auto; }
+      .menu-toggle { display: grid; }
+      .header-apply { display: none; }
+
+      .gnb {
+        position: fixed;
+        inset: 72px 0 auto;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 18px 24px 30px;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: 0 24px 60px rgba(20,39,44,.12);
+      }
+
+      .gnb.open { display: flex; }
+      .gnb a { padding: 17px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+      .gnb a:last-child { border-bottom: 0; }
+      .gnb a::after { display: none; }
+
+      .hero { min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; min-height: auto; padding: 68px 0 86px; }
+      .hero-lab { width: min(100%, 720px); min-height: 580px; margin: 0 auto; }
+      .lab-shell { inset: 0 20px 0 20px; }
+      .lab-floating { right: 0; }
+
+      .intro-grid { grid-template-columns: 1fr; }
+      .intro-sticky { position: static; }
+      .diagnosis-head { display: block; }
+      .diagnosis-tabs { justify-content: flex-start; margin-top: 30px; }
+      .diagnosis-panel { grid-template-columns: 1fr; gap: 42px; }
+      .programs-head,
+      .archive-head { grid-template-columns: 1fr; }
+      .program-grid { grid-template-columns: 1fr; grid-template-rows: auto; min-height: 0; }
+      .program-card.featured { grid-row: auto; min-height: 560px; }
+      .trust-top { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-item { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line-light); }
+      .trust-item:last-child { border-bottom: 0; }
+      .trust-item h3 { margin-top: 28px; }
+      .cta-panel { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 28px), var(--container)); }
+      .brand-copy span { display: none; }
+      .brand-symbol { width: 40px; }
+      .brand-copy strong { font-size: 20px; }
+      .hero-inner { padding-top: 50px; }
+      .hero h1 { font-size: 48px; line-height: 1.03; }
+      .hero h1 .accent::after { height: 11px; bottom: 3px; }
+      .hero-desc { font-size: 16px; }
+      .hero-actions { display: grid; }
+      .btn { width: 100%; }
+      .hero-meta { grid-template-columns: 1fr; }
+      .hero-meta article { min-height: auto; padding: 15px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .hero-meta article:not(:first-child) { padding-left: 0; }
+      .hero-meta article:last-child { border-bottom: 0; }
+      .hero-lab { min-height: 510px; }
+      .lab-shell { inset: 0; }
+      .lab-canvas::before { font-size: 56px; }
+      .map-tag { min-width: 92px; padding: 9px 10px; }
+      .map-tag strong { font-size: 12px; }
+      .lab-floating { width: 190px; right: -2px; bottom: 12px; padding: 16px; }
+      .lab-floating strong { font-size: 17px; }
+      .section { padding: 96px 0; }
+      .display-title { font-size: 40px; }
+      .section-intro { font-size: 15px; }
+      .intro-sticky blockquote { font-size: 30px; }
+      .process-item { grid-template-columns: 48px 1fr; gap: 14px; }
+      .process-arrow { display: none; }
+      .process-copy h3 { font-size: 23px; }
+      .diagnosis-tabs { display: grid; grid-template-columns: 1fr 1fr; }
+      .diagnosis-tab { width: 100%; }
+      .report-inner { grid-template-columns: 1fr; }
+      .radar { width: 210px; }
+      .program-card { padding: 26px; }
+      .program-card.featured { min-height: 520px; }
+      .program-card::before { font-size: 70px; }
+      .program-card:not(.featured) h3 { font-size: 26px; }
+      .program-visual { width: 250px; }
+      .archive-item { grid-template-columns: 1fr auto; gap: 16px; }
+      .archive-kind { grid-column: 1 / -1; }
+      .cta-panel { padding: 42px 26px; }
+      .footer-main { grid-template-columns: 1fr; gap: 34px; }
+      .footer-brand { grid-column: auto; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .floating-apply { width: 54px; height: 54px; right: 14px; bottom: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <div class="announcement">
+    <div class="container announcement-inner">
+      <p><strong>지음터</strong>는 학교·지자체·공공기관과 함께 청소년의 미래를 설계합니다.</p>
+      <a href="#archive">교육 실적 보기 <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="주식회사 지음터 홈">
+        <span class="brand-symbol" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>지음터</strong>
+          <span>JIEUMTEO EDUCATION</span>
+        </span>
+      </a>
+
+      <nav class="gnb" id="gnb" aria-label="주요 메뉴">
+        <a href="#about">지음터 소개</a>
+        <a href="#diagnosis">진로검사</a>
+        <a href="#programs">교육 프로그램</a>
+        <a href="#trust">기관 협력</a>
+        <a href="#archive">교육 아카이브</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="header-apply js-open-modal" type="button">
+          상담·교육 신청
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <div class="hero-index">JIEUMTEO · CAREER EDUCATION PLATFORM</div>
+          <h1>
+            가능성을<br />
+            <span class="outline">발견하고,</span><br />
+            미래를 <span class="accent">짓습니다.</span>
+          </h1>
+          <p class="hero-desc">
+            지능·정서 기반의 과학적 진단과 현장 중심 교육을 연결해,
+            청소년이 자신의 강점을 이해하고 스스로 진로를 설계하도록 돕습니다.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#diagnosis">
+              나에게 맞는 검사 찾기
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <button class="btn btn-ghost js-open-modal" type="button">교육 프로그램 문의</button>
+          </div>
+          <div class="hero-meta" aria-label="지음터 교육 방향">
+            <article>
+              <strong>과학적 진단</strong>
+              <span>지능·정서 기반 분석</span>
+            </article>
+            <article>
+              <strong>개인별 설계</strong>
+              <span>강점 중심 진로 방향</span>
+            </article>
+            <article>
+              <strong>현장형 교육</strong>
+              <span>학교·기관 연계 프로그램</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-lab reveal" aria-label="진로 설계 맵 시각화">
+          <div class="lab-shell" id="labShell">
+            <div class="lab-topbar">
+              <div class="lab-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span>PERSONAL CAREER MAP · 2026</span>
+            </div>
+            <div class="lab-canvas">
+              <svg class="map-svg" viewBox="0 0 600 430" aria-hidden="true">
+                <path d="M86 100 C195 90 213 178 300 208 C389 237 419 126 520 104" />
+                <path d="M88 327 C184 342 222 264 300 208 C383 150 430 309 520 324" />
+                <path d="M86 100 C119 209 165 273 88 327" />
+                <path d="M520 104 C476 181 478 253 520 324" />
+                <circle cx="86" cy="100" r="7" />
+                <circle cx="520" cy="104" r="7" />
+                <circle cx="88" cy="327" r="7" />
+                <circle cx="520" cy="324" r="7" />
+              </svg>
+              <div class="map-center"><strong>나</strong></div>
+              <div class="map-tag tag-1"><strong>흥미</strong>Interest</div>
+              <div class="map-tag tag-2"><strong>강점</strong>Strength</div>
+              <div class="map-tag tag-3"><strong>가치</strong>Value</div>
+              <div class="map-tag tag-4"><strong>미래</strong>Future</div>
+            </div>
+          </div>
+          <div class="lab-floating">
+            <small>JIEUMTEO INSIGHT</small>
+            <strong>정답을 정하는 교육보다, 방향을 찾는 교육</strong>
+            <p>검사 결과를 실제 선택과 행동으로 이어지게 설계합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>진로적성검사</span><span>정서지능분석</span><span>인성교육</span><span>자기주도학습</span><span>교과목선택</span><span>진학컨설팅</span>
+        <span>진로적성검사</span><span>정서지능분석</span><span>인성교육</span><span>자기주도학습</span><span>교과목선택</span><span>진학컨설팅</span>
+      </div>
+    </div>
+
+    <section class="section" id="about">
+      <div class="container intro-grid">
+        <div class="intro-sticky reveal">
+          <div class="quote-mark" aria-hidden="true">“</div>
+          <blockquote>
+            한 번의 검사가 아니라,<br />
+            성장 과정 전체를 함께 봅니다.
+          </blockquote>
+          <p>
+            지음터는 검사 결과를 단순 전달하지 않습니다. 청소년의 흥미, 강점,
+            정서와 학습 습관을 종합적으로 이해하고 실행 가능한 진로 계획으로 연결합니다.
+          </p>
+        </div>
+
+        <div>
+          <span class="section-label reveal">Our Approach</span>
+          <h2 class="display-title reveal">진단에서 실행까지,<br /><em>하나의 성장 흐름</em>으로</h2>
+          <p class="section-intro reveal">
+            학생과 학부모, 학교와 기관이 같은 방향을 바라볼 수 있도록
+            명확한 진단과 이해하기 쉬운 교육 구조를 설계합니다.
+          </p>
+
+          <div class="process-list" style="margin-top:52px;">
+            <article class="process-item reveal">
+              <div class="process-no">01</div>
+              <div class="process-copy">
+                <h3>진단 · 나를 정확히 이해하기</h3>
+                <p>진로적성, 정서지능, 학습 성향을 과학적으로 분석해 학생의 현재 위치와 잠재 가능성을 확인합니다.</p>
+              </div>
+              <div class="process-arrow" aria-hidden="true">↗</div>
+            </article>
+            <article class="process-item reveal">
+              <div class="process-no">02</div>
+              <div class="process-copy">
+                <h3>발견 · 강점의 언어 만들기</h3>
+                <p>결과를 학생이 이해할 수 있는 언어로 해석하고, 흥미와 강점을 자신의 이야기로 표현하도록 돕습니다.</p>
+              </div>
+              <div class="process-arrow" aria-hidden="true">↗</div>
+            </article>
+            <article class="process-item reveal">
+              <div class="process-no">03</div>
+              <div class="process-copy">
+                <h3>설계 · 선택 기준 세우기</h3>
+                <p>교과목, 진학, 직업 탐색에서 흔들리지 않도록 개인에게 맞는 선택 기준과 단계별 계획을 세웁니다.</p>
+              </div>
+              <div class="process-arrow" aria-hidden="true">↗</div>
+            </article>
+            <article class="process-item reveal">
+              <div class="process-no">04</div>
+              <div class="process-copy">
+                <h3>성장 · 실제 경험으로 연결하기</h3>
+                <p>학교와 지역의 현장 체험, 프로젝트형 교육을 통해 계획을 행동으로 옮기고 스스로 성장 경험을 축적합니다.</p>
+              </div>
+              <div class="process-arrow" aria-hidden="true">↗</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section diagnosis-section" id="diagnosis">
+      <div class="container">
+        <div class="diagnosis-head">
+          <div>
+            <span class="section-label reveal">Diagnosis System</span>
+            <h2 class="display-title reveal">검사 결과를 넘어,<br /><em>다음 선택</em>을 보여줍니다.</h2>
+            <p class="section-intro reveal">학생의 연령과 고민에 맞춰 필요한 검사를 선택하고, 이해하기 쉬운 결과 해석과 상담으로 연결합니다.</p>
+          </div>
+          <div class="diagnosis-tabs reveal" role="tablist" aria-label="진로검사 종류">
+            <button class="diagnosis-tab active" type="button" role="tab" aria-selected="true" data-tab="aptitude">진로적성</button>
+            <button class="diagnosis-tab" type="button" role="tab" aria-selected="false" data-tab="emotion">정서지능</button>
+            <button class="diagnosis-tab" type="button" role="tab" aria-selected="false" data-tab="subject">교과목선택</button>
+            <button class="diagnosis-tab" type="button" role="tab" aria-selected="false" data-tab="admission">진학설계</button>
+          </div>
+        </div>
+
+        <div class="diagnosis-stage reveal">
+          <article class="diagnosis-panel active" id="aptitude" role="tabpanel">
+            <div class="diagnosis-copy">
+              <span class="panel-index">01 · CAREER APTITUDE</span>
+              <h3>좋아하는 것과 잘하는 것 사이에서 진로의 단서를 찾습니다.</h3>
+              <p>흥미, 지능, 성격과 가치관을 함께 살펴 학생이 자연스럽게 몰입하고 성장할 수 있는 진로 영역을 탐색합니다.</p>
+              <div class="diagnosis-keywords"><span>흥미 유형</span><span>강점 지능</span><span>직업군 탐색</span><span>상담 연계</span></div>
+            </div>
+            <div class="report-preview">
+              <div class="report-inner">
+                <div>
+                  <div class="report-head"><strong>개인 강점 프로파일</strong><span>CAREER REPORT</span></div>
+                  <div class="radar" aria-hidden="true">
+                    <svg viewBox="0 0 240 240">
+                      <polygon class="radar-grid" points="120,18 216,88 180,202 60,202 24,88" />
+                      <polygon class="radar-grid" points="120,48 188,98 162,178 78,178 52,98" />
+                      <polygon class="radar-grid" points="120,78 160,108 145,154 95,154 80,108" />
+                      <polygon class="radar-data" points="120,38 194,96 154,180 70,178 48,94" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="report-side">
+                  <div class="score-row"><span>언어 표현</span><div class="score-bar"><i style="--score:82%"></i></div><b>82</b></div>
+                  <div class="score-row"><span>논리 사고</span><div class="score-bar"><i style="--score:71%"></i></div><b>71</b></div>
+                  <div class="score-row"><span>대인 이해</span><div class="score-bar"><i style="--score:88%"></i></div><b>88</b></div>
+                  <div class="score-row"><span>자기 성찰</span><div class="score-bar"><i style="--score:76%"></i></div><b>76</b></div>
+                  <div class="report-note">강점이 높은 영역과 흥미 활동을 연결해 구체적인 탐색 과제를 제안합니다.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="diagnosis-panel" id="emotion" role="tabpanel">
+            <div class="diagnosis-copy">
+              <span class="panel-index">02 · EMOTIONAL INTELLIGENCE</span>
+              <h3>감정을 이해하고 조절하는 힘은 진로 선택의 중요한 기반입니다.</h3>
+              <p>자기이해, 감정조절, 관계 형성 능력을 확인하고 학교생활과 학습 상황에서 필요한 정서 역량을 키웁니다.</p>
+              <div class="diagnosis-keywords"><span>자기 인식</span><span>감정 조절</span><span>관계 역량</span><span>회복 탄력성</span></div>
+            </div>
+            <div class="report-preview">
+              <div class="report-inner">
+                <div>
+                  <div class="report-head"><strong>정서 역량 프로파일</strong><span>EQ REPORT</span></div>
+                  <div class="radar" aria-hidden="true">
+                    <svg viewBox="0 0 240 240">
+                      <polygon class="radar-grid" points="120,18 216,88 180,202 60,202 24,88" />
+                      <polygon class="radar-grid" points="120,48 188,98 162,178 78,178 52,98" />
+                      <polygon class="radar-grid" points="120,78 160,108 145,154 95,154 80,108" />
+                      <polygon class="radar-data" points="120,46 184,102 168,188 72,170 54,102" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="report-side">
+                  <div class="score-row"><span>자기 이해</span><div class="score-bar"><i style="--score:79%"></i></div><b>79</b></div>
+                  <div class="score-row"><span>감정 조절</span><div class="score-bar"><i style="--score:68%"></i></div><b>68</b></div>
+                  <div class="score-row"><span>공감 능력</span><div class="score-bar"><i style="--score:86%"></i></div><b>86</b></div>
+                  <div class="score-row"><span>관계 형성</span><div class="score-bar"><i style="--score:81%"></i></div><b>81</b></div>
+                  <div class="report-note">정서 강점과 보완 영역을 바탕으로 일상에서 실천할 수 있는 성장 과제를 제안합니다.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="diagnosis-panel" id="subject" role="tabpanel">
+            <div class="diagnosis-copy">
+              <span class="panel-index">03 · SUBJECT SELECTION</span>
+              <h3>과목 선택을 진학 조건이 아니라 나의 성장 경로로 바라봅니다.</h3>
+              <p>흥미 분야와 학업 역량, 희망 진로를 종합해 학생에게 적합한 교과목 조합과 학습 방향을 설계합니다.</p>
+              <div class="diagnosis-keywords"><span>고교학점제</span><span>교과 조합</span><span>학업 역량</span><span>진로 연계</span></div>
+            </div>
+            <div class="report-preview">
+              <div class="report-inner">
+                <div>
+                  <div class="report-head"><strong>교과 적합도 프로파일</strong><span>SUBJECT REPORT</span></div>
+                  <div class="radar" aria-hidden="true">
+                    <svg viewBox="0 0 240 240">
+                      <polygon class="radar-grid" points="120,18 216,88 180,202 60,202 24,88" />
+                      <polygon class="radar-grid" points="120,48 188,98 162,178 78,178 52,98" />
+                      <polygon class="radar-grid" points="120,78 160,108 145,154 95,154 80,108" />
+                      <polygon class="radar-data" points="120,30 206,94 158,170 72,192 62,102" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="report-side">
+                  <div class="score-row"><span>인문 사회</span><div class="score-bar"><i style="--score:84%"></i></div><b>84</b></div>
+                  <div class="score-row"><span>자연 과학</span><div class="score-bar"><i style="--score:66%"></i></div><b>66</b></div>
+                  <div class="score-row"><span>융합 탐구</span><div class="score-bar"><i style="--score:91%"></i></div><b>91</b></div>
+                  <div class="score-row"><span>자기 관리</span><div class="score-bar"><i style="--score:74%"></i></div><b>74</b></div>
+                  <div class="report-note">교과 선택의 이유와 학습 목표를 연결해 학생부 활동과 진학 계획에 일관성을 높입니다.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="diagnosis-panel" id="admission" role="tabpanel">
+            <div class="diagnosis-copy">
+              <span class="panel-index">04 · ADMISSION DESIGN</span>
+              <h3>현재 성적만 보지 않고 학생의 강점이 드러나는 진학 전략을 만듭니다.</h3>
+              <p>학생의 진로 방향, 학업 역량, 활동 경험을 종합해 현실적이면서도 성장 가능성이 있는 진학 경로를 제안합니다.</p>
+              <div class="diagnosis-keywords"><span>진학 로드맵</span><span>학생부 설계</span><span>활동 전략</span><span>개별 상담</span></div>
+            </div>
+            <div class="report-preview">
+              <div class="report-inner">
+                <div>
+                  <div class="report-head"><strong>진학 준비 프로파일</strong><span>ADMISSION REPORT</span></div>
+                  <div class="radar" aria-hidden="true">
+                    <svg viewBox="0 0 240 240">
+                      <polygon class="radar-grid" points="120,18 216,88 180,202 60,202 24,88" />
+                      <polygon class="radar-grid" points="120,48 188,98 162,178 78,178 52,98" />
+                      <polygon class="radar-grid" points="120,78 160,108 145,154 95,154 80,108" />
+                      <polygon class="radar-data" points="120,42 196,88 170,180 74,188 50,110" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="report-side">
+                  <div class="score-row"><span>진로 명확성</span><div class="score-bar"><i style="--score:73%"></i></div><b>73</b></div>
+                  <div class="score-row"><span>학업 역량</span><div class="score-bar"><i style="--score:82%"></i></div><b>82</b></div>
+                  <div class="score-row"><span>활동 연계</span><div class="score-bar"><i style="--score:77%"></i></div><b>77</b></div>
+                  <div class="score-row"><span>실행 계획</span><div class="score-bar"><i style="--score:69%"></i></div><b>69</b></div>
+                  <div class="report-note">현재 위치와 목표 사이의 간격을 구체적인 학기별 실행 계획으로 나누어 제안합니다.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section programs-section" id="programs">
+      <div class="container">
+        <div class="programs-head">
+          <div>
+            <span class="section-label reveal">Education Programs</span>
+            <h2 class="display-title reveal">배운 내용을 삶에서<br /><em>써보는 교육</em></h2>
+            <p class="section-intro reveal">학교와 기관의 목적, 학생의 연령과 규모에 맞춰 검사·워크숍·현장체험을 유연하게 구성합니다.</p>
+          </div>
+          <a class="text-link reveal" href="#contact">전체 프로그램 문의 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="program-grid">
+          <article class="program-card featured reveal" data-number="01">
+            <span class="program-type">CORE PROGRAM</span>
+            <h3>자기이해에서 진로설계까지 이어지는 통합 진로교육</h3>
+            <p>검사, 해석, 진로탐색, 실행계획을 하나의 흐름으로 구성해 학생이 스스로 자신의 미래를 설명할 수 있도록 돕습니다.</p>
+            <div class="program-tags"><span>진로적성검사</span><span>직업세계 탐색</span><span>진로 로드맵</span><span>결과 리포트</span></div>
+            <div class="program-visual" aria-hidden="true"></div>
+          </article>
+
+          <article class="program-card reveal" data-number="02">
+            <span class="program-type">GROWTH PROGRAM</span>
+            <h3>인성·정서지능 교육</h3>
+            <p>자기이해, 감정조절, 공감과 관계 역량을 활동 중심으로 익히는 성장 프로그램입니다.</p>
+            <div class="program-tags"><span>자기인식</span><span>회복탄력성</span><span>관계역량</span></div>
+            <div class="mini-graphic" aria-hidden="true"><i style="--h:32%"></i><i style="--h:58%"></i><i style="--h:76%"></i><i style="--h:92%"></i></div>
+          </article>
+
+          <article class="program-card reveal" data-number="03">
+            <span class="program-type">LEARNING PROGRAM</span>
+            <h3>자기주도학습·진학설계</h3>
+            <p>학습 습관과 목표를 점검하고 교과목 선택부터 진학 준비까지 단계별 실행 계획을 만듭니다.</p>
+            <div class="program-tags"><span>학습전략</span><span>교과목선택</span><span>진학컨설팅</span></div>
+            <div class="mini-graphic" aria-hidden="true"><i style="--h:46%"></i><i style="--h:64%"></i><i style="--h:72%"></i><i style="--h:98%"></i></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section trust-section" id="trust">
+      <div class="container">
+        <div class="trust-top">
+          <div>
+            <span class="section-label reveal">Public Partnership</span>
+            <h2 class="display-title reveal">학교와 지역이 함께 만드는<br /><em>진로교육 생태계</em></h2>
+          </div>
+          <p class="trust-copy reveal">
+            지음터는 단발성 특강보다 지역과 학교 안에 지속 가능한 진로교육 구조를 만드는 것을 지향합니다.
+            기관의 사업 목적과 현장 상황을 이해하고, 기획부터 운영·결과 정리까지 함께합니다.
+          </p>
+        </div>
+
+        <div class="trust-grid">
+          <article class="trust-item reveal">
+            <span class="num">01 · SCHOOL</span>
+            <h3>학교 맞춤형 교육</h3>
+            <p>학년별 발달단계와 교육과정을 반영해 검사, 워크숍, 진로캠프를 유기적으로 구성합니다.</p>
+          </article>
+          <article class="trust-item reveal">
+            <span class="num">02 · LOCAL</span>
+            <h3>지역 연계 체험</h3>
+            <p>지역의 직업인과 산업 현장을 교육 자원으로 연결해 학생의 현실적인 진로 탐색을 돕습니다.</p>
+          </article>
+          <article class="trust-item reveal">
+            <span class="num">03 · PUBLIC</span>
+            <h3>공공사업 운영</h3>
+            <p>지자체·공공기관 사업의 목적에 맞춘 프로그램 설계와 현장 운영, 결과 아카이빙을 지원합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="archive">
+      <div class="container">
+        <div class="archive-head">
+          <div>
+            <span class="section-label reveal">Education Archive</span>
+            <h2 class="display-title reveal">교육의 순간을<br /><em>다음 사업의 자산</em>으로</h2>
+            <p class="section-intro reveal">교육 프로그램과 협력 실적을 체계적으로 기록해 학교·기관이 지음터의 전문성을 빠르게 확인할 수 있도록 구성합니다.</p>
+          </div>
+          <a class="text-link reveal" href="#">전체 아카이브 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="archive-list">
+          <a class="archive-item reveal" href="#">
+            <span class="archive-kind">CAREER CAMP</span>
+            <div><h3>청소년 진로탐색 프로젝트형 캠프</h3><p>진로검사 · 직업세계 탐색 · 팀 프로젝트 · 결과 공유</p></div>
+            <span class="archive-icon" aria-hidden="true">↗</span>
+          </a>
+          <a class="archive-item reveal" href="#">
+            <span class="archive-kind">EQ WORKSHOP</span>
+            <div><h3>정서지능 기반 관계 역량 워크숍</h3><p>자기이해 · 감정조절 · 공감 · 의사소통 활동</p></div>
+            <span class="archive-icon" aria-hidden="true">↗</span>
+          </a>
+          <a class="archive-item reveal" href="#">
+            <span class="archive-kind">ADMISSION</span>
+            <div><h3>고교학점제 교과목 선택 및 진학설계</h3><p>과목 적합도 분석 · 학기별 계획 · 개인 상담</p></div>
+            <span class="archive-icon" aria-hidden="true">↗</span>
+          </a>
+          <a class="archive-item reveal" href="#">
+            <span class="archive-kind">LOCAL PROJECT</span>
+            <div><h3>지역 직업인 연계 현장체험 프로그램</h3><p>지역 산업 이해 · 직업 인터뷰 · 현장 탐방 · 결과 기록</p></div>
+            <span class="archive-icon" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-wrap" id="contact">
+      <div class="container">
+        <div class="cta-panel reveal">
+          <div>
+            <small>START WITH JIEUMTEO</small>
+            <h2>우리 학교와 기관에 맞는 진로교육을 함께 설계해 보세요.</h2>
+            <p>대상, 인원, 교육 목적을 알려주시면 적합한 검사와 프로그램 구성을 안내해드립니다.</p>
+          </div>
+          <button class="btn btn-primary js-open-modal" type="button">상담 신청하기 <span class="arrow" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <span class="brand-symbol" aria-hidden="true"></span>
+          <span class="brand-copy"><strong>지음터</strong><span>JIEUMTEO EDUCATION</span></span>
+        </a>
+        <p>청소년이 자신의 가능성을 발견하고 스스로 미래를 설계하도록 돕는 경남 기반 진로교육 전문기업입니다.</p>
+      </div>
+      <div>
+        <h3 class="footer-title">QUICK MENU</h3>
+        <ul class="footer-list">
+          <li><a href="#about">지음터 소개</a></li>
+          <li><a href="#diagnosis">진로검사</a></li>
+          <li><a href="#programs">교육 프로그램</a></li>
+          <li><a href="#archive">교육 아카이브</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">CONTACT</h3>
+        <ul class="footer-list">
+          <li>경상남도 통영시 무전5길</li>
+          <li>상담 및 교육 문의</li>
+          <li><a href="mailto:hello@jieumteo.co.kr">hello@jieumteo.co.kr</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 JIEUMTEO CO., LTD. ALL RIGHTS RESERVED.</p>
+      <div><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+    </div>
+  </footer>
+
+  <button class="floating-apply js-open-modal" type="button" aria-label="상담 신청 열기">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 5h14v10H9l-4 4V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <div class="modal" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <div>
+          <small>CONSULTATION REQUEST</small>
+          <h2 id="modalTitle">상담·교육 프로그램 신청</h2>
+        </div>
+        <button class="modal-close" type="button" aria-label="닫기">×</button>
+      </div>
+      <form class="modal-body" id="applyForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="org">학교·기관명</label>
+            <input id="org" name="org" type="text" placeholder="기관명을 입력해주세요" required />
+          </div>
+          <div class="field">
+            <label for="name">담당자명</label>
+            <input id="name" name="name" type="text" placeholder="담당자 성함" required />
+          </div>
+          <div class="field">
+            <label for="phone">연락처</label>
+            <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" required />
+          </div>
+          <div class="field">
+            <label for="service">관심 분야</label>
+            <select id="service" name="service" required>
+              <option value="">선택해주세요</option>
+              <option>진로적성검사</option>
+              <option>정서지능·인성교육</option>
+              <option>자기주도학습</option>
+              <option>교과목선택·진학설계</option>
+              <option>기관 맞춤형 교육</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="message">문의 내용</label>
+            <textarea id="message" name="message" placeholder="교육 대상, 예상 인원, 희망 일정 등을 남겨주세요."></textarea>
+          </div>
+        </div>
+        <label class="form-agree"><input type="checkbox" required /> <span>상담 접수를 위한 개인정보 수집 및 이용에 동의합니다.</span></label>
+        <button class="btn btn-primary" type="submit">상담 신청 접수</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const body = document.body;
+      const header = document.getElementById('siteHeader');
+      const progress = document.getElementById('scrollProgress');
+      const menuToggle = document.getElementById('menuToggle');
+      const gnb = document.getElementById('gnb');
+      const modal = document.getElementById('applyModal');
+      const modalClose = modal.querySelector('.modal-close');
+      const modalOpeners = document.querySelectorAll('.js-open-modal');
+      const applyForm = document.getElementById('applyForm');
+      const tabs = document.querySelectorAll('.diagnosis-tab');
+      const panels = document.querySelectorAll('.diagnosis-panel');
+      const labShell = document.getElementById('labShell');
+      let lastFocused = null;
+
+      const updateScrollUI = () => {
+        const scrollTop = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = maxScroll > 0 ? `${(scrollTop / maxScroll) * 100}%` : '0%';
+        header.classList.toggle('scrolled', scrollTop > 10);
+      };
+
+      window.addEventListener('scroll', updateScrollUI, { passive: true });
+      updateScrollUI();
+
+      menuToggle.addEventListener('click', () => {
+        const open = !gnb.classList.contains('open');
+        gnb.classList.toggle('open', open);
+        menuToggle.classList.toggle('active', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+        body.classList.toggle('menu-open', open);
+      });
+
+      gnb.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          gnb.classList.remove('open');
+          menuToggle.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      const openModal = (trigger) => {
+        lastFocused = trigger || document.activeElement;
+        modal.classList.add('open');
+        body.classList.add('modal-open');
+        setTimeout(() => modalClose.focus(), 50);
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('open');
+        body.classList.remove('modal-open');
+        if (lastFocused) lastFocused.focus();
+      };
+
+      modalOpeners.forEach(button => button.addEventListener('click', () => openModal(button)));
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          if (modal.classList.contains('open')) closeModal();
+          if (gnb.classList.contains('open')) menuToggle.click();
+        }
+      });
+
+      applyForm.addEventListener('submit', event => {
+        event.preventDefault();
+        alert('상담 신청이 접수되었습니다. 실제 운영 시 서버 또는 이메일 전송 기능과 연결해주세요.');
+        applyForm.reset();
+        closeModal();
+      });
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.tab;
+          tabs.forEach(item => {
+            const active = item === tab;
+            item.classList.toggle('active', active);
+            item.setAttribute('aria-selected', String(active));
+          });
+          panels.forEach(panel => panel.classList.toggle('active', panel.id === target));
+        });
+      });
+
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.13 });
+
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      const sections = [...document.querySelectorAll('main section[id]')];
+      const navLinks = [...document.querySelectorAll('.gnb a')];
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+          }
+        });
+      }, { rootMargin: '-38% 0px -52% 0px', threshold: 0 });
+      sections.forEach(section => sectionObserver.observe(section));
+
+      if (window.matchMedia('(pointer:fine)').matches && labShell) {
+        const lab = labShell.parentElement;
+        lab.addEventListener('mousemove', event => {
+          const rect = lab.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - .5;
+          const y = (event.clientY - rect.top) / rect.height - .5;
+          labShell.style.transform = `rotateY(${x * 5}deg) rotateX(${y * -4}deg)`;
+        });
+        lab.addEventListener('mouseleave', () => {
+          labShell.style.transform = 'rotateY(-3deg) rotateX(1deg)';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
